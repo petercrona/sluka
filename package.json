@@ -1,0 +1,27 @@
+{
+  "name": "sluka",
+  "version": "0.0.1",
+  "description": "A simple JavaScript parser library.",
+  "main": "sluka.js",
+  "dependencies": {
+    "kling": "^0.0.2",
+    "mocha": "^2.3.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha sluka.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petercrona/sluka.git"
+  },
+  "keywords": [
+    "parser"
+  ],
+  "author": "Peter Crona <petercrona89@gmail.com> (http://www.icecoldcode.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/petercrona/sluka/issues"
+  },
+  "homepage": "https://github.com/petercrona/sluka#readme"
+}
