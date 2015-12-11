@@ -24,6 +24,10 @@ describe('Sluka', function() {
             var result = sluka.consumeFirstMatch(['class', 'Foobar'], getTestData());
             assert.equal(result.consumed, 'class');
         });
+        it('Shall consume the string first occuring first in text (3 strings)', function () {
+            var result = sluka.consumeFirstMatch(['class', 'aFoobar', 'fdsa'], getTestData());
+            assert.equal(result.consumed, 'class');
+        });
         it('Shall return null if string does not exist', function () {
             var result = sluka.consumeFirstMatch(['gfsa','fdsafdas'], getTestData());
             assert.equal(result.consumed, null);

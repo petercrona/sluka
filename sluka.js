@@ -25,7 +25,13 @@ function consumeFirstMatch(stringArray, text) {
     const cConsume = _.curry(consume);
     const matchers = stringArray.map((x) => cConsume(x));
     const results = matchers.map((m) => m(text));
-    return results.sort((a,b) => a.offset - b.offset)[0];
+    return results.sort(offsetComparator)[0];
+}
+
+function offsetComparator(a, b) {
+    let aOffset = (a.offset === -1) ? Number.MAX_SAFE_INTEGER : a.offset;
+    let bOffset = (b.offset === -1) ? Number.MAX_SAFE_INTEGER : b.offset;;
+    return aOffset - bOffset;
 }
 
 function throwWhitespace(text) {
