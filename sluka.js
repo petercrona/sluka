@@ -4,6 +4,7 @@ var _ = require('kling/kling.js');
 
 module.exports = {
     consume: _.curry(consume),
+    consumeWithRegexp: _.curry(consumeWithRegexp),
     consumeFirstMatch: _.curry(consumeFirstMatch),
     throwWhitespace: _.curry(throwWhitespace),
     consumeUntilClosed: _.curry(consumeUntilClosed),
@@ -13,12 +14,21 @@ module.exports = {
 
 function consume(string, text) {
     let i = text.indexOf(string);
-    if (i === -1) {
+    return consumeFromIndex(i, string, text);
+}
+
+function consumeWithRegexp(string, text) {
+    let i = text.search(string);
+    return consumeFromIndex(i, string, text);
+}
+
+function consumeFromIndex(index, string, text) {
+    if (index === -1) {
         return result(null, text);
     } else {
-        const consumed = text.substring(i, i + string.length);
-        const rest = text.substring(i + string.length);
-        return result(consumed, rest, i);
+        const consumed = text.substring(index, index + string.length);
+        const rest = text.substring(index + string.length);
+        return result(consumed, rest, index);
     }
 }
 
