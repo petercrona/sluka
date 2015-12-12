@@ -4,8 +4,8 @@ var _ = require('kling/kling.js');
 
 module.exports = {
     consumeAnywhere: _.curry(consumeAnywhere),
-    consumeWithRegexp: _.curry(consumeWithRegexp),
-    consumeFirstMatch: _.curry(consumeFirstMatch),
+    consumeWithRegexpAnywhere: _.curry(consumeWithRegexpAnywhere),
+    consumeFirstMatchAnywhere: _.curry(consumeFirstMatchAnywhere),
     consumeUntilClosed: _.curry(consumeUntilClosed),
     consumeUntil: _.curry(consumeUntil),
     consumeRegexp: _.curry(consumeRegexp),
@@ -18,7 +18,7 @@ function consumeAnywhere(string, text) {
     return consumeFromIndex(i, string, text);
 }
 
-function consumeWithRegexp(string, text) {
+function consumeWithRegexpAnywhere(string, text) {
     let i = text.search(string);
     return consumeFromIndex(i, string, text);
 }
@@ -33,7 +33,7 @@ function consumeFromIndex(index, string, text) {
     }
 }
 
-function consumeFirstMatch(stringArray, text) {
+function consumeFirstMatchAnywhere(stringArray, text) {
     const cConsume = _.curry(consumeAnywhere);
     const matchers = stringArray.map((x) => cConsume(x));
     const results = matchers.map((m) => m(text));

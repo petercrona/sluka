@@ -15,21 +15,21 @@ describe('Sluka', function() {
         });
     });
 
-    describe('consumeFirstMatch', function () {
+    describe('consumeFirstMatchAnywhere', function () {
         it('Shall consume the string first occuring first in text', function () {
-            var result = sluka.consumeFirstMatch(['Foobar', 'class'], getTestData());
+            var result = sluka.consumeFirstMatchAnywhere(['Foobar', 'class'], getTestData());
             assert.equal(result.consumed, 'class');
         });
         it('Shall consume the string first occuring first in text (order)', function () {
-            var result = sluka.consumeFirstMatch(['class', 'Foobar'], getTestData());
+            var result = sluka.consumeFirstMatchAnywhere(['class', 'Foobar'], getTestData());
             assert.equal(result.consumed, 'class');
         });
         it('Shall consume the string first occuring first in text (3 strings)', function () {
-            var result = sluka.consumeFirstMatch(['class', 'aFoobar', 'fdsa'], getTestData());
+            var result = sluka.consumeFirstMatchAnywhere(['class', 'aFoobar', 'fdsa'], getTestData());
             assert.equal(result.consumed, 'class');
         });
         it('Shall return null if string does not exist', function () {
-            var result = sluka.consumeFirstMatch(['gfsa','fdsafdas'], getTestData());
+            var result = sluka.consumeFirstMatchAnywhere(['gfsa','fdsafdas'], getTestData());
             assert.equal(result.consumed, null);
         });
     });
