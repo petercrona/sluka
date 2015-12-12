@@ -3,16 +3,17 @@
 var _ = require('kling/kling.js');
 
 module.exports = {
-    consume: _.curry(consume),
+    consumeAnywhere: _.curry(consumeAnywhere),
     consumeWithRegexp: _.curry(consumeWithRegexp),
     consumeFirstMatch: _.curry(consumeFirstMatch),
-    throwWhitespace: _.curry(throwWhitespace),
     consumeUntilClosed: _.curry(consumeUntilClosed),
     consumeUntil: _.curry(consumeUntil),
+    consumeRegexp: _.curry(consumeRegexp),
+    throwWhitespace: _.curry(throwWhitespace),
     throwInit: _.curry(throwInit)
 };
 
-function consume(string, text) {
+function consumeAnywhere(string, text) {
     let i = text.indexOf(string);
     return consumeFromIndex(i, string, text);
 }
@@ -33,7 +34,7 @@ function consumeFromIndex(index, string, text) {
 }
 
 function consumeFirstMatch(stringArray, text) {
-    const cConsume = _.curry(consume);
+    const cConsume = _.curry(consumeAnywhere);
     const matchers = stringArray.map((x) => cConsume(x));
     const results = matchers.map((m) => m(text));
     return results.sort(offsetComparator)[0];
@@ -60,7 +61,7 @@ function throwInit(string, text) {
 }
 
 function consumeUntilClosed(openTag, closeTag, text) {
-    const openTagParse = consume(openTag, text);
+    const openTagParse = consumeAnywhere(openTag, text);
     const textRest = openTagParse.rest;
 
     let nrOpen = 1;
@@ -86,6 +87,18 @@ function consumeUntil(string, text) {
         const consumed = text.substring(0, i+1);
         const rest = text.substring(i+1);
         return result(consumed, rest, i);
+    }
+}
+
+function consumeRegexp(regexp, text) {
+    var matched = text.match(regexp);
+
+    if (matched === null || matched.index !== 0) {
+        return result(null, text);
+    } else {
+        const consumed = matched[0];
+        const rest = text.substring(matched.index);
+        return result(consumed, rest, matched.index);
     }
 }
 

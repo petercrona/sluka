@@ -4,13 +4,13 @@ var assert = require('assert');
 var sluka = require('./sluka');
 
 describe('Sluka', function() {
-    describe('consume', function () {
+    describe('consumeAnywhere', function () {
         it('Shall consume string if string exist in text', function () {
-            var result = sluka.consume('Foobar', getTestData());
+            var result = sluka.consumeAnywhere('Foobar', getTestData());
             assert.equal(result.consumed, 'Foobar');
         });
         it('Shall return null if string does not exist', function () {
-            var result = sluka.consume('gfsa', getTestData());
+            var result = sluka.consumeAnywhere('gfsa', getTestData());
             assert.equal(result.consumed, null);
         });
     });
