@@ -7,7 +7,8 @@ module.exports = {
     consumeFirstMatch: _.curry(consumeFirstMatch),
     throwWhitespace: _.curry(throwWhitespace),
     consumeUntilClosed: _.curry(consumeUntilClosed),
-    consumeUntil: _.curry(consumeUntil)
+    consumeUntil: _.curry(consumeUntil),
+    throwInit: _.curry(throwInit)
 };
 
 function consume(string, text) {
@@ -37,6 +38,15 @@ function offsetComparator(a, b) {
 function throwWhitespace(text) {
     for (var i = 0; i < text.length && isWhitespace(text[i]); i++) {}
     return result(null, text.substring(i), i);
+}
+
+function throwInit(string, text) {
+    var i = text.indexOf(string);
+    if (i === 0) {
+        return result(null, text.substring(string.length), string.length);
+    } else {
+        return result(null, text, -1);
+    }
 }
 
 function consumeUntilClosed(openTag, closeTag, text) {
