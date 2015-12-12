@@ -1,6 +1,6 @@
 {
   "name": "sluka",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple JavaScript parser library.",
   "main": "sluka.js",
   "dependencies": {
