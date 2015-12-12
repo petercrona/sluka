@@ -97,7 +97,7 @@ function consumeRegexp(regexp, text) {
         return result(null, text);
     } else {
         const consumed = matched[0];
-        const rest = text.substring(matched.index);
+        const rest = text.substring(matched.index + consumed.length);
         return result(consumed, rest, matched.index);
     }
 }
